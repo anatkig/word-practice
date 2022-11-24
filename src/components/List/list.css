@@ -1,0 +1,12 @@
+#list {
+    flex: 1 1 0px;
+    font-size: 20px;
+    padding: 15px;
+    margin-top: 30px;
+    border: solid black 1px;
+}
+
+#word-container {
+    max-height: 70vh;
+    overflow-y: auto;
+}
