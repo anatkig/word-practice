@@ -1,12 +1,25 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { StoredData } from '../../types/types';
 import inputValueParse from '../../logic/inputValueParse';
 import './header.css';
 
-const Header = ({ setNewWords }: { setNewWords: Dispatch<SetStateAction<StoredData[]>> }) => {
+const Header = ({ setNewWords, setPlay, play }:
+    { setNewWords: Dispatch<SetStateAction<StoredData[]>>, setPlay: Dispatch<SetStateAction<boolean>>, play: boolean }) => {
 
     const [inputValue, setInputValue] = useState<string>();
     const [isInputOpen, setIsInputOpen] = useState(false);
+    const [startRestart, setStartRestart] = useState("Start");
+
+    useEffect(() => {
+        if (play) {
+            setStartRestart("Restart");
+        } else if (!play && startRestart === "Restart") {
+            setPlay(true);
+        }
+        else {
+            setStartRestart("Start");
+        }
+    }, [play])
 
     const handleAddButton = () => {
         setIsInputOpen(!isInputOpen);
@@ -22,11 +35,23 @@ const Header = ({ setNewWords }: { setNewWords: Dispatch<SetStateAction<StoredDa
             setNewWords(inputValueParse(inputValue));
         }
     }
+    const handleStart = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
+        if (startRestart === "Start") {
+            setPlay(true);
+            setStartRestart("Restart");
+        } else {
+            setPlay(false);
+
+        }
+    }
 
     return (
         <div id="header">
 
-            <button id="add-new-words" onClick={handleAddButton}>Add New Words</button>
+            <button className='header-button start' onClick={handleStart}>{startRestart}</button>
+            {play && <button className='header-button'>Pause</button>}
+            <button className='header-button' onClick={handleAddButton}>Add New Words</button>
 
             {isInputOpen &&
                 <div>

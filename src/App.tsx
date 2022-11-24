@@ -10,6 +10,8 @@ function App() {
 
   const [newWords, setNewWords] = useState<StoredData[]>([]);
   const [wordsToLearn, setWordsToLearn] = useState(localStorageRead("Words to Learn"));
+  const [play, setPlay] = useState(false);
+
 
   useEffect(() => {
     if (newWords) {
@@ -20,8 +22,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header setNewWords={setNewWords} />
-      <MainContainer wordsToLearn={wordsToLearn} setWordsToLearn={setWordsToLearn} />
+      <Header setNewWords={setNewWords} play={play} setPlay={setPlay} />
+      <MainContainer wordsToLearn={wordsToLearn} setWordsToLearn={setWordsToLearn} play={play} setPlay={setPlay} />
     </div>
   );
 }

@@ -4,8 +4,15 @@
     flex: 0 1 auto;
 }
 
-#add-new-words {
-    font-size: 16px;
-    padding: 3px;
-    margin: 3px auto;
+.header-button {
+    font-size: 18px;
+    padding: 5px 10px;
+    margin: 3px;
+    cursor: pointer;
+
+}
+
+.start {
+    background-color: red;
+    color: white;
 }

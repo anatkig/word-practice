@@ -7,16 +7,27 @@ import CounterBox from '../CounterBox/CounterBox';
 import WriteBox from '../WriteBox/WriteBox';
 import localStorageRead from '../../logic/localStorageRead';
 import arrayShuffle from '../../logic/arrayShuffle';
-import localStorageRemoveItems from '../../logic/localStorageRemoveItems';
 import localStorageWrite from '../../logic/localStorageWrite';
-import localStorageAddItems from '../../logic/localStorageAddItems';
 
 
-const MainContainer = ({ wordsToLearn, setWordsToLearn }: { wordsToLearn: StoredData[], setWordsToLearn: Dispatch<SetStateAction<StoredData[]>> }) => {
+const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
+    {
+        wordsToLearn: StoredData[],
+        setWordsToLearn: Dispatch<SetStateAction<StoredData[]>>,
+        play: boolean,
+        setPlay: Dispatch<SetStateAction<boolean>>
+    }) => {
 
     const [currentWords, setCurrentWords] = useState<StoredData[]>(localStorageRead("Current Words"));
     const [learntWords, setLearntWords] = useState<StoredData[]>(localStorageRead("Learnt Words"));
+    const [count, setCount] = useState(0);
+    const [timerStopper, setTimerStopper] = useState(600);
 
+    useEffect(() => {
+        if (!play) {
+            setCount(0);
+        }
+    }, [play])
 
 
     useEffect(() => {
@@ -66,8 +77,14 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn }: { wordsToLearn: Stored
         <div id="main-container">
             <div className='main-column'><List name={"Current Words"} words={currentWords} /></div>
             <div className='main-column action-column' >
-                <CounterBox />
-                <WriteBox currentWords={currentWords} setCurrentWords={setCurrentWords} setLearntWords={setLearntWords} />
+                <CounterBox count={count} play={play} setPlay={setPlay} timerStopper={timerStopper} />
+                <WriteBox currentWords={currentWords}
+                    setCurrentWords={setCurrentWords}
+                    setLearntWords={setLearntWords}
+                    setCount={setCount}
+                    setTimerStopper={setTimerStopper}
+                    play={play}
+                />
             </div>
             <div className='main-column'>
                 <List name={"Words to Learn"} words={wordsToLearn} />

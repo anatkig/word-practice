@@ -10,7 +10,7 @@ const List = ({ name, words }: { name: string, words: StoredData[] }) => {
         <div id="list">
             <h3 id="name">{name}</h3>
             <div id="word-container">
-                {words.map((word, index) => <Word word={word} hit={name === "Current Words" ? true : false} index={index} />)}
+                {words.map((word, index) => <Word key={`${word.gu}${index}`} word={word} hit={name === "Current Words" ? true : false} index={index} />)}
             </div>
         </div>
     )

@@ -1,17 +1,19 @@
 import { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import createRandomWordAndAswer from '../../logic/createRandomWordAndAswer';
-import localStorageAddItems from '../../logic/localStorageAddItems';
 import { StoredData } from '../../types/types';
 import './write-box.css';
 
-const WriteBox = ({ currentWords, setCurrentWords, setLearntWords }:
+const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, setTimerStopper, play }:
     {
         currentWords: StoredData[],
         setCurrentWords: Dispatch<SetStateAction<StoredData[]>>,
-        setLearntWords: Dispatch<SetStateAction<StoredData[]>>
+        setLearntWords: Dispatch<SetStateAction<StoredData[]>>,
+        setCount: Dispatch<SetStateAction<number>>,
+        setTimerStopper: Dispatch<SetStateAction<number>>,
+        play: boolean
     }) => {
 
-    const [inputValue, setInputValue] = useState<string>();
+    const [inputValue, setInputValue] = useState<string>("");
     const [word, setWord] = useState<string>();
     const [answer, setAnswer] = useState<string>();
     const [wordIndex, setWordIndex] = useState<number>();
@@ -32,7 +34,9 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords }:
         setInputValue(current);
 
         if (current === answer) {
-
+            setCount(prev => prev + 1);
+            setTimerStopper(prev => { return Math.floor(prev - prev / 40) });
+            setInputValue("");
             const currentUnit = currentWords[wordIndex as number];
 
             if (currentUnit.hit >= 7) {
@@ -50,14 +54,16 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords }:
     }
     return (
         <div id="write-box">
-            <div id="inner-box">
-                <h1 id="head-word">{word}</h1>
-                <input id="input" onChange={handleInput} value={inputValue} />
-                <div id="buttons">
-                    <button>Delete</button>
-                    <button>Next</button>
+            {play &&
+                <div id="inner-box">
+                    <h1 id="head-word">{word}</h1>
+                    <input id="input" onChange={handleInput} value={inputValue} />
+                    <div id="buttons">
+                        <button>Delete</button>
+                        <button>Next</button>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     )
 }

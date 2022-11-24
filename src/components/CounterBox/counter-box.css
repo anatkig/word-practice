@@ -2,4 +2,13 @@
     width: 95%;
     height: 25%;
     border: solid black 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 10px;
+}
+
+#counter {
+    font-size: 40px;
 }
