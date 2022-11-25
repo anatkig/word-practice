@@ -19,6 +19,12 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
     const [wordIndex, setWordIndex] = useState<number>();
 
     useEffect(() => {
+        if (!play) {
+            setInputValue("");
+        }
+    }, [play])
+
+    useEffect(() => {
         if (currentWords.length) {
             const [word, answer, randomIndex] = createRandomWordAndAswer(currentWords);
             setWord(word as string);
@@ -54,7 +60,7 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
             {play ?
                 <div id="inner-box">
                     <h1 id="head-word">{word}</h1>
-                    <input id="input" onChange={handleInput} value={inputValue} />
+                    <input id="input" autoComplete="off" onChange={handleInput} value={inputValue} />
                     {/* <div id="buttons">
                         <button>Delete</button>
                         <button>Next</button>
