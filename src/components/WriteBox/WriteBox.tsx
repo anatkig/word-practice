@@ -47,22 +47,19 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
                 curWords[wordIndex as number].hit = curWords[wordIndex as number].hit + 1;
                 setCurrentWords([...curWords]);
             }
-
         }
-
-
     }
     return (
         <div id="write-box">
-            {play &&
+            {play ?
                 <div id="inner-box">
                     <h1 id="head-word">{word}</h1>
                     <input id="input" onChange={handleInput} value={inputValue} />
-                    <div id="buttons">
+                    {/* <div id="buttons">
                         <button>Delete</button>
                         <button>Next</button>
-                    </div>
-                </div>
+                    </div> */}
+                </div> : <h1>Press Start</h1>
             }
         </div>
     )

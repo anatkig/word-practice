@@ -10,13 +10,10 @@ const CounterBox = ({ count, play, setPlay, timerStopper }: {
 }) => {
     return (
         <>
-            {play &&
-                <div id="counter-box">
-                    <Clock play={play} setPlay={setPlay} timerStopper={timerStopper} />
-                    <div id="counter">{count}</div>
-
-                </div>
-            }
+            <div id="counter-box">
+                <Clock play={play} setPlay={setPlay} timerStopper={timerStopper} />
+                <div id="counter">Score: {count}</div>
+            </div>
         </>
     )
 }

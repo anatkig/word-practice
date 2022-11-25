@@ -11,7 +11,13 @@ const Clock = ({ play, setPlay, timerStopper }: {
 
     useEffect(() => {
         setTime(timerStopper)
-    }, [timerStopper])
+    }, [timerStopper]);
+
+    useEffect(() => {
+        if (!play) {
+            setTime(timerStopper);
+        }
+    }, [play, timerStopper])
 
 
     useEffect(() => {
@@ -27,7 +33,7 @@ const Clock = ({ play, setPlay, timerStopper }: {
 
         } else { setPlay(false) };
         return () => clearInterval(interval as NodeJS.Timeout);
-    }, [play, time])
+    }, [play, time, setPlay])
 
 
     return (

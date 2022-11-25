@@ -26,6 +26,7 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
     useEffect(() => {
         if (!play) {
             setCount(0);
+            setTimerStopper(600);
         }
     }, [play])
 
