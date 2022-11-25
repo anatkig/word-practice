@@ -38,11 +38,12 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
             const current = arrayShuffle([...toLearn, ...learnt]);
             setCurrentWords(current);
 
-        } else if (currentWords.length === 9) {
+        } else if (currentWords.length < 10) {
             const randomWord = Math.floor(Math.random() * 2);
             if (randomWord === 0) {
                 const learnt = localStorageRead("Learnt Words");
                 const word = learnt[0];
+                word.hit = 0;
                 setCurrentWords(prev => [...prev, word]);
 
             } else if (randomWord === 1) {
