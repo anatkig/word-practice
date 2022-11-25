@@ -12,8 +12,6 @@ const CounterBox = ({ count, play, setPlay, timerStopper }: {
         <>
             {play &&
                 <div id="counter-box">
-
-
                     <Clock play={play} setPlay={setPlay} timerStopper={timerStopper} />
                     <div id="counter">{count}</div>
 

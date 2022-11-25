@@ -48,11 +48,8 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
                 const toLearn = localStorageRead("Words to Learn");
                 const word = toLearn[0];
                 setCurrentWords(prev => [...prev, word]);
-
             }
-
         }
-
     }, [wordsToLearn, currentWords, learntWords]);
 
 
@@ -60,7 +57,7 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
         const currentWordsGuTexts = currentWords.map(word => word.gu);
         setLearntWords(prev => [...prev.filter(word => !currentWordsGuTexts.includes(word.gu))]);
         setWordsToLearn(prev => [...prev.filter(word => !currentWordsGuTexts.includes(word.gu))]);
-    }, [currentWords])
+    }, [currentWords, setWordsToLearn])
 
 
     useEffect(() => {

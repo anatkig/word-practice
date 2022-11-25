@@ -12,9 +12,7 @@ const Header = ({ setNewWords, setPlay, play }:
 
     useEffect(() => {
         if (play) {
-            setStartRestart("Restart");
-        } else if (!play && startRestart === "Restart") {
-            setPlay(true);
+            setStartRestart("Stop");
         }
         else {
             setStartRestart("Start");
@@ -39,10 +37,9 @@ const Header = ({ setNewWords, setPlay, play }:
 
         if (startRestart === "Start") {
             setPlay(true);
-            setStartRestart("Restart");
+            setStartRestart("Stop");
         } else {
             setPlay(false);
-
         }
     }
 
@@ -50,7 +47,6 @@ const Header = ({ setNewWords, setPlay, play }:
         <div id="header">
 
             <button className='header-button start' onClick={handleStart}>{startRestart}</button>
-            {play && <button className='header-button'>Pause</button>}
             <button className='header-button' onClick={handleAddButton}>Add New Words</button>
 
             {isInputOpen &&
