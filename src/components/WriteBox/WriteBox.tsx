@@ -60,11 +60,7 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
             {play ?
                 <div id="inner-box">
                     <h1 id="head-word">{word}</h1>
-                    <input id="input" autoComplete="off" onChange={handleInput} value={inputValue} />
-                    {/* <div id="buttons">
-                        <button>Delete</button>
-                        <button>Next</button>
-                    </div> */}
+                    <input id="input" autoComplete="off" onChange={handleInput} value={inputValue} autoFocus />
                 </div> : <h1>Press Start</h1>
             }
         </div>

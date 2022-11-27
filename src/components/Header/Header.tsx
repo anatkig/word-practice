@@ -33,7 +33,7 @@ const Header = ({ setNewWords, setPlay, play }:
             setNewWords(inputValueParse(inputValue));
         }
     }
-    const handleStart = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleStart = (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 
         if (startRestart === "Start") {
             setPlay(true);
@@ -42,6 +42,11 @@ const Header = ({ setNewWords, setPlay, play }:
             setPlay(false);
         }
     }
+    window.addEventListener('keydown', (event) => {
+        if (event.key === "Enter") {
+            handleStart()
+        }
+    })
 
     return (
         <div id="header">
