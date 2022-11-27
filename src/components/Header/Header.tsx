@@ -31,6 +31,7 @@ const Header = ({ setNewWords, setPlay, play }:
         if (inputValue) {
             setIsInputOpen(false);
             setNewWords(inputValueParse(inputValue));
+            setInputValue("");
         }
     }
     const handleStart = (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -56,7 +57,7 @@ const Header = ({ setNewWords, setPlay, play }:
 
             {isInputOpen &&
                 <div>
-                    <input id="input" placeholder='Put your words here' value={inputValue} onChange={handleChange} />
+                    <input id="input" autoComplete="off" placeholder='Put your words here' value={inputValue} onChange={handleChange} />
                     <button onClick={handleSubmit}>Submit</button>
                 </div>}
         </div>
