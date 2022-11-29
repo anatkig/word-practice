@@ -22,6 +22,7 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
     const [learntWords, setLearntWords] = useState<StoredData[]>(localStorageRead("Learnt Words"));
     const [count, setCount] = useState(0);
     const [timerStopper, setTimerStopper] = useState(600);
+    const [availableLearnt, setAvailableLearnt] = useState<StoredData[]>([]);
 
     useEffect(() => {
         if (!play) {
@@ -31,18 +32,25 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
         }
     }, [play])
 
+    useEffect(() => {
+        if (learntWords.length) {
+            const currentSession = Number(localStorage.getItem("session"));
+            setAvailableLearnt([...learntWords.filter(word => !word.session || word.session <= currentSession)])
+        }
+    }, [learntWords])
+
 
     useEffect(() => {
-        if (!currentWords.length && (wordsToLearn.length || learntWords.length)) {
+        if (!currentWords.length && (wordsToLearn.length || availableLearnt.length)) {
             const toLearn = wordsToLearn.slice(0, 5);
-            const learnt = learntWords.slice(0, 5);
+            const learnt = availableLearnt.slice(0, 5);
             const current = arrayShuffle([...toLearn, ...learnt]);
             setCurrentWords(current);
 
         } else if (currentWords.length < 10) {
 
-            const learnt = localStorageRead("Learnt Words");
-            const wordLearnt = learnt[0];
+
+            const wordLearnt = availableLearnt[0];
             wordLearnt.hit = 0;
 
             const toLearn = localStorageRead("Words to Learn");
@@ -50,7 +58,7 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
             setCurrentWords(prev => arrayShuffle([...prev, wordLearnt, wordToLearn]));
 
         }
-    }, [wordsToLearn, currentWords, learntWords]);
+    }, [wordsToLearn, currentWords, availableLearnt]);
 
 
     useEffect(() => {

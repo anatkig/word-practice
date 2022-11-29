@@ -33,6 +33,19 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
         }
     }, [currentWords])
 
+    useEffect(() => {
+        if (word) {
+            const currentSession = localStorage.getItem("session");
+            if (currentSession) {
+                localStorage.setItem("session", String(Number(currentSession) + 1))
+            } else {
+                localStorage.setItem("session", String(0))
+            }
+        }
+
+
+    }, [word])
+
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
 
         const current = event.target.value;
@@ -47,6 +60,18 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
 
             if (currentUnit.hit >= 7) {
                 setCurrentWords((prev: StoredData[]) => [...prev.filter((unit: StoredData, index: number) => index !== wordIndex)]);
+
+                if (currentUnit.step && currentUnit.session) {
+                    const step = currentUnit.step * 2;
+                    const session = currentUnit.session + step;
+                    currentUnit.session = session;
+                    currentUnit.step = step;
+                } else {
+                    const currentSession = Number(localStorage.getItem("session"));
+                    const step = 30;
+                    currentUnit.session = currentSession + step;
+                    currentUnit.step = step;
+                }
                 setLearntWords(prev => [...prev, currentUnit]);
             } else {
                 const curWords = [...currentWords];

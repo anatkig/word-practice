@@ -1,5 +1,7 @@
 export interface StoredData {
     ru: string,
     gu: string,
-    hit: number
+    hit: number,
+    session?: number,
+    step?: number
 }
