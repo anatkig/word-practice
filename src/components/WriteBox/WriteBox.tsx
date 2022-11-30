@@ -52,7 +52,13 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
 
         setInputValue(current);
 
-        if (current === answer) {
+        const currentArr = current.split(" ");
+        const answerArr = answer?.split(" ");
+
+        if (current.length === answer?.length
+            && currentArr.every(word => answerArr?.includes(word))
+            && answerArr?.every(word => currentArr.includes(word))
+        ) {
             setCount(prev => prev + 1);
             setTimerStopper(prev => { return Math.floor(prev - prev / 40) });
             setInputValue("");
