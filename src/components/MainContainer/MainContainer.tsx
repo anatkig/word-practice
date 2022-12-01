@@ -58,7 +58,7 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
             setCurrentWords(prev => arrayShuffle([...prev, wordLearnt, wordToLearn]));
 
         }
-    }, [wordsToLearn, currentWords, availableLearnt, wordsToLearn]);
+    }, [wordsToLearn, currentWords, availableLearnt, learntWords]);
 
 
     useEffect(() => {
