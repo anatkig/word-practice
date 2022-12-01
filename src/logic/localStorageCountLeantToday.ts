@@ -2,7 +2,6 @@ const localStorageCountLearntToday = () => {
 
     const currentDate = new Date().getDate();
     const learntUnit = localStorage.getItem("learnt-today");
-
     if (learntUnit) {
 
         const parsedUnit = JSON.parse(learntUnit);
@@ -12,14 +11,14 @@ const localStorageCountLearntToday = () => {
 
         if (storedDate === currentDate) {
             const newLearnUnit = [storedDate, storedCount + 1];
-            localStorage.setItem("learnt-taday", JSON.stringify(newLearnUnit));
+            localStorage.setItem("learnt-today", JSON.stringify(newLearnUnit));
         } else {
-            const newLearnUnit = [currentDate, 0];
-            localStorage.setItem("learnt-taday", JSON.stringify(newLearnUnit));
+            const newLearnUnit = [currentDate, 1];
+            localStorage.setItem("learnt-today", JSON.stringify(newLearnUnit));
         }
     } else {
-        const newLearnUnit = [currentDate, 0];
-        localStorage.setItem("learnt-taday", JSON.stringify(newLearnUnit));
+        const newLearnUnit = [currentDate, 1];
+        localStorage.setItem("learnt-today", JSON.stringify(newLearnUnit));
     }
 
 

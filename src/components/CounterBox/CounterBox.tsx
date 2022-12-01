@@ -1,26 +1,15 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import localStorageRead from '../../logic/localStorageRead';
+import React, { Dispatch, SetStateAction } from 'react';
 import Clock from '../Clock/Clock';
 import './counter-box.css';
 
-const CounterBox = ({ count, play, setPlay, timerStopper }: {
+const CounterBox = ({ count, play, setPlay, timerStopper, learntToday }: {
     count: number,
     play: boolean,
     setPlay: Dispatch<SetStateAction<boolean>>,
-    timerStopper: number
+    timerStopper: number,
+    learntToday: number
 }) => {
 
-    const [learntToday, setLearntToday] = useState(0);
-
-    useEffect(() => {
-        const learnt = localStorageRead("learnt-taday");
-        if (learnt) {
-            const currentDate = new Date().getDate();
-            if (currentDate === learnt[0]) {
-                setLearntToday(learnt[1]);
-            }
-        }
-    }, [count])
 
     return (
         <>

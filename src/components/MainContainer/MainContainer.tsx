@@ -8,6 +8,7 @@ import WriteBox from '../WriteBox/WriteBox';
 import localStorageRead from '../../logic/localStorageRead';
 import arrayShuffle from '../../logic/arrayShuffle';
 import localStorageWrite from '../../logic/localStorageWrite';
+import localStorageCountLearntToday from '../../logic/localStorageCountLeantToday';
 
 
 const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
@@ -23,6 +24,7 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
     const [count, setCount] = useState(0);
     const [timerStopper, setTimerStopper] = useState(600);
     const [availableLearnt, setAvailableLearnt] = useState<StoredData[]>([]);
+    const [learntToday, setLearntToday] = useState<number>(0);
 
     useEffect(() => {
         if (!play) {
@@ -31,6 +33,14 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
             setCount(0);
         }
     }, [play])
+
+    useEffect(() => {
+        const learntToday = localStorageRead("learnt-today");
+        const currentDate = new Date().getDate();
+        if (learntToday && learntToday[0] === currentDate) {
+            setLearntToday(learntToday[1]);
+        }
+    }, [currentWords])
 
     useEffect(() => {
         if (learntWords.length) {
@@ -75,6 +85,13 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
         localStorageWrite(learntWords, "Learnt Words");
     }, [learntWords]);
     useEffect(() => {
+        const currentWordsToLearn = localStorageRead("Words to Learn");
+        if (currentWordsToLearn.length) {
+            if (currentWordsToLearn.length > wordsToLearn.length) {
+                localStorageCountLearntToday();
+                setLearntToday(prev => prev + 1);
+            }
+        }
         localStorageWrite(wordsToLearn, "Words to Learn");
     }, [wordsToLearn])
 
@@ -82,7 +99,12 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
         <div id="main-container">
             <div className='main-column'><List name={"Current Words"} words={currentWords} /></div>
             <div className='main-column action-column' >
-                <CounterBox count={count} play={play} setPlay={setPlay} timerStopper={timerStopper} />
+                <CounterBox count={count}
+                    play={play}
+                    setPlay={setPlay}
+                    timerStopper={timerStopper}
+                    learntToday={learntToday}
+                />
                 <WriteBox currentWords={currentWords}
                     setCurrentWords={setCurrentWords}
                     setLearntWords={setLearntWords}

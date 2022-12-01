@@ -1,6 +1,5 @@
 import { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import createRandomWordAndAswer from '../../logic/createRandomWordAndAswer';
-import localStorageCountLearntToday from '../../logic/localStorageCountLeantToday';
 import { StoredData } from '../../types/types';
 import './write-box.css';
 
@@ -65,7 +64,7 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
             setInputValue("");
             const currentUnit = currentWords[wordIndex as number];
 
-            if (currentUnit.hit >= 7) {
+            if (currentUnit.hit >= 1) {
                 setCurrentWords((prev: StoredData[]) => [...prev.filter((unit: StoredData, index: number) => index !== wordIndex)]);
 
                 if (currentUnit.step && currentUnit.session) {
@@ -80,7 +79,6 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
                     currentUnit.step = step;
                 }
                 setLearntWords(prev => [...prev, currentUnit]);
-                localStorageCountLearntToday();
             } else {
                 const curWords = [...currentWords];
                 curWords[wordIndex as number].hit = curWords[wordIndex as number].hit + 1;
