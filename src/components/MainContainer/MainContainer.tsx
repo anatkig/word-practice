@@ -52,21 +52,30 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
 
     useEffect(() => {
         if (!currentWords.length && (wordsToLearn.length || availableLearnt.length || learntWords.length)) {
-            const toLearn = wordsToLearn.slice(0, 5);
-            const learnt = availableLearnt.length ? availableLearnt.slice(0, 5) : learntWords.slice(0, 5);
+
+            const toLearn = wordsToLearn.length >= 5 ? wordsToLearn.slice(0, 5) : wordsToLearn.slice();
+            const learnt = availableLearnt.length ?
+                (availableLearnt.length >= 5 ? availableLearnt.slice(0, 5) : availableLearnt.slice()) :
+                learntWords.length >= 5 ? learntWords.slice(0, 5) :
+                    learntWords.slice();
+
             const current = arrayShuffle([...toLearn, ...learnt]);
             setCurrentWords(current);
 
         } else if (currentWords.length < 10) {
 
-
-            const wordLearnt = availableLearnt.length ? availableLearnt[0] : learntWords[0];
-            wordLearnt.hit = 0;
+            const wordLearnt = availableLearnt.length ? availableLearnt[0] : learntWords.length ? learntWords[0] : null;
+            if (wordLearnt) { wordLearnt.hit = 0; }
 
             const toLearn = localStorageRead("Words to Learn");
-            const wordToLearn = toLearn[0];
-            setCurrentWords(prev => arrayShuffle([...prev, wordLearnt, wordToLearn]));
-
+            const wordToLearn = toLearn.length ? toLearn[0] : null;
+            if (wordLearnt && wordToLearn) {
+                setCurrentWords(prev => arrayShuffle([...prev, wordLearnt, wordToLearn]));
+            } else if (wordLearnt) {
+                setCurrentWords(prev => arrayShuffle([...prev, wordLearnt]));
+            } else if (wordToLearn) {
+                setCurrentWords(prev => arrayShuffle([...prev, wordToLearn]));
+            }
         }
     }, [wordsToLearn, currentWords, availableLearnt, learntWords]);
 
