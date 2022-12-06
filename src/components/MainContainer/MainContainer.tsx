@@ -98,7 +98,7 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
         if (currentWordsToLearn.length) {
             if (currentWordsToLearn.length > wordsToLearn.length) {
                 localStorageCountLearntToday();
-                setLearntToday(prev => prev + 1);
+                wordsToLearn.length && setLearntToday(prev => prev + 1);
             }
         }
         localStorageWrite(wordsToLearn, "Words to Learn");
