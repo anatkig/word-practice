@@ -6,3 +6,9 @@
     padding: 0 5px;
     margin: 3px;
 }
+
+#delete {
+    color: blue;
+    text-align: left;
+    cursor: pointer;
+}

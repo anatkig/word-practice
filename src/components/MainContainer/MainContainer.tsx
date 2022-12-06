@@ -106,7 +106,7 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
 
     return (
         <div id="main-container">
-            <div className='main-column'><List name={"Current Words"} words={currentWords} /></div>
+            <div className='main-column'><List name={"Current Words"} words={currentWords} setCurrentWords={setCurrentWords} /></div>
             <div className='main-column action-column' >
                 <CounterBox count={count}
                     play={play}
