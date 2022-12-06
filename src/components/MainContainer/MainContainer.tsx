@@ -103,7 +103,7 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
         }
         localStorageWrite(wordsToLearn, "Words to Learn");
     }, [wordsToLearn])
-    console.log(wordsToLearn)
+
     return (
         <div id="main-container">
             <div className='main-column'><List name={"Current Words"} words={currentWords} setCurrentWords={setCurrentWords} /></div>
