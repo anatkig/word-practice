@@ -8,7 +8,7 @@ const Word = ({ word, hit, index, setCurrentWords }:
     }) => {
 
     const handleDelete = (word: string) => {
-        setCurrentWords && setCurrentWords(prev => prev.filter((wordObj: StoredData) => wordObj.gu === word));
+        setCurrentWords && setCurrentWords(prev => prev.filter((wordObj: StoredData) => wordObj.gu !== word));
     }
 
     return (
@@ -16,7 +16,7 @@ const Word = ({ word, hit, index, setCurrentWords }:
             <div id="word">
                 {`${index}). ${word.ru} - ${word.gu} ${hit ? ' - ' + word.hit : ''}`}
             </div>
-            <div id="delete" onClick={() => handleDelete(word.gu)}>Delete</div>
+            {setCurrentWords && <div id="delete" onClick={() => handleDelete(word.gu)}>Delete</div>}
         </>
     )
 }
