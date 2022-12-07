@@ -64,7 +64,7 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
             setInputValue("");
             const currentUnit = currentWords[wordIndex as number];
 
-            if (currentUnit.hit >= (4 + Math.floor(currentUnit.gu.length / 5))) {
+            if (currentUnit.hit >= (4 + Math.round(currentUnit.gu.length / 7))) {
                 setCurrentWords((prev: StoredData[]) => [...prev.filter((unit: StoredData, index: number) => index !== wordIndex)]);
 
                 if (currentUnit.step && currentUnit.session) {
