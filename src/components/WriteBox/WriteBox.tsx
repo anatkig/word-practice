@@ -30,6 +30,7 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
             setWord(word as string);
             setAnswer(answer as string);
             setWordIndex(randomIndex as number);
+            localStorage.setItem("wordIndex", String(randomIndex));
         }
     }, [currentWords])
 
@@ -42,8 +43,6 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
                 localStorage.setItem("session", String(0))
             }
         }
-
-
     }, [word])
 
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {

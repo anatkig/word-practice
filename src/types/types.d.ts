@@ -3,5 +3,5 @@ export interface StoredData {
     gu: string,
     hit: number,
     session?: number,
-    step?: number
+    step?: number,
 }
