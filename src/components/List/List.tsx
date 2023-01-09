@@ -16,11 +16,15 @@ const List = ({ name, words, setCurrentWords }:
 
     const handleClick = () => {
         setOpen(!open);
-        const chosenWordIndex = Number(localStorage.getItem("wordIndex"));
+        if (name === "Current Words") {
+            const chosenWordIndex = Number(localStorage.getItem("wordIndex"));
 
-        if (chosenWordIndex) {
-            words[chosenWordIndex].hit = words[chosenWordIndex].hit - 1;
-            localStorageWrite(words, "Current Words");
+            if (chosenWordIndex) {
+                words[chosenWordIndex].hit = words[chosenWordIndex].hit - 1;
+                localStorageWrite(words, "Current Words");
+
+                setTimeout(() => setOpen(false), 5000)
+            }
         }
     }
 
