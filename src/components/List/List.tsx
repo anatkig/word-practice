@@ -19,7 +19,7 @@ const List = ({ name, words, setCurrentWords }:
         if (name === "Current Words") {
             const chosenWordIndex = Number(localStorage.getItem("wordIndex"));
 
-            if (chosenWordIndex) {
+            if (chosenWordIndex >= 0 && chosenWordIndex < words.length) {
                 words[chosenWordIndex].hit = words[chosenWordIndex].hit - 1;
                 localStorageWrite(words, "Current Words");
 
