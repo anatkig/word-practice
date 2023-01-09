@@ -31,7 +31,10 @@ const Clock = ({ play, setPlay, timerStopper }: {
                 }, 100)
             }
 
-        } else { setPlay(false) };
+        } else {
+            setPlay(false);
+            localStorage.setItem("wordIndex", "");
+        };
         return () => clearInterval(interval as NodeJS.Timeout);
     }, [play, time, setPlay])
 
