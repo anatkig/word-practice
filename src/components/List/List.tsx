@@ -15,7 +15,12 @@ const List = ({ name, words, setCurrentWords }:
     const [open, setOpen] = useState(name === "Current Words" ? false : true);
 
     const handleClick = () => {
+
         setOpen(!open);
+
+        const input = document.querySelector("#input") as HTMLElement | null;
+        input?.focus();
+
         if (name === "Current Words") {
             const chosenWordIndex = Number(localStorage.getItem("wordIndex"));
 
