@@ -43,7 +43,7 @@ const Header = ({ setNewWords, setPlay, play }:
             setPlay(false);
         }
     }
-    window.addEventListener('keydown', (event) => {
+    window.addEventListener('keyup', (event) => {
         if (event.key === "Enter") {
             handleStart()
         }
