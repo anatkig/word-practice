@@ -26,14 +26,14 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
     }, [play])
 
     useEffect(() => {
-        if (currentWords.length) {
+        if (currentWords.length && play) {
             const [word, answer, randomIndex] = createRandomWordAndAswer(currentWords);
             setWord(word as string);
             setAnswer(answer as string);
             setWordIndex(randomIndex as number);
             localStorage.setItem("wordIndex", String(randomIndex));
         }
-    }, [currentWords])
+    }, [currentWords, play])
 
     useEffect(() => {
         if (word) {
