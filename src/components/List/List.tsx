@@ -23,10 +23,10 @@ const List = ({ name, words, setCurrentWords }:
         input?.focus();
 
         if (name === "Current Words" && !open) {
-            const chosenWordIndex = localStorage.getItem("wordIndex");
+            const chosenWord = localStorage.getItem("currentWorkingWord");
 
-            if (chosenWordIndex !== "" && Number(chosenWordIndex) >= 0 && Number(chosenWordIndex) < words.length) {
-                const index = Number(chosenWordIndex);
+            if (chosenWord) {
+                const index = words.findIndex(word => word.ru === chosenWord);
                 words[index].hit = Number(words[index].hit) - 1;
                 localStorageWrite(words, "Current Words");
 

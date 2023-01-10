@@ -29,9 +29,9 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
         if (currentWords.length && play) {
             const [word, answer, randomIndex] = createRandomWordAndAswer(currentWords);
             setWord(word as string);
+            localStorage.setItem("currentWorkingWord", JSON.stringify(word));
             setAnswer(answer as string);
             setWordIndex(randomIndex as number);
-            localStorage.setItem("wordIndex", String(randomIndex));
         }
     }, [currentWords, play])
 
