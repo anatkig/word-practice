@@ -21,6 +21,7 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
     useEffect(() => {
         if (!play) {
             setInputValue("");
+            localStorage.setItem("wordIndex", "");
         }
     }, [play])
 

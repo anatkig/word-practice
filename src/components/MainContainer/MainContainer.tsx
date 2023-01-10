@@ -86,7 +86,6 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
         setWordsToLearn(prev => [...prev.filter(word => !currentWordsGuTexts.includes(word.gu))]);
     }, [currentWords, setWordsToLearn])
 
-
     useEffect(() => {
         localStorageWrite(currentWords, "Current Words");
     }, [currentWords]);

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { StoredData } from "../../types/types";
 import localStorageWrite from "../../logic/localStorageWrite";
 import Word from "../Word/Word";
@@ -13,6 +13,7 @@ const List = ({ name, words, setCurrentWords }:
     }) => {
 
     const [open, setOpen] = useState(name === "Current Words" ? false : true);
+    const timeout = useRef<NodeJS.Timeout | null>(null);
 
     const handleClick = () => {
 
@@ -21,17 +22,36 @@ const List = ({ name, words, setCurrentWords }:
         const input = document.querySelector("#input") as HTMLElement | null;
         input?.focus();
 
-        if (name === "Current Words") {
+        if (name === "Current Words" && !open) {
             const chosenWordIndex = Number(localStorage.getItem("wordIndex"));
 
             if (chosenWordIndex >= 0 && chosenWordIndex < words.length) {
-                words[chosenWordIndex].hit = words[chosenWordIndex].hit - 1;
+                words[chosenWordIndex].hit = Number(words[chosenWordIndex].hit) - 1;
                 localStorageWrite(words, "Current Words");
 
-                setTimeout(() => setOpen(false), 5000)
+                if (timeout.current) {
+                    clearTimeout(timeout.current);
+                    timeout.current = null;
+                }
+                timeout.current = setTimeout(() => setOpen(false), 5000)
             }
         }
     }
+    const handldeHotKey = (event: KeyboardEvent) => {
+        if (event.metaKey && event.key === "c") {
+
+            handleClick();
+        }
+    }
+
+    useEffect(() => {
+        if (name === "Current Words") {
+            window.addEventListener("keydown", handldeHotKey);
+        }
+        return () => window.removeEventListener("keydown", handldeHotKey);
+
+    })
+
 
     return (
         <div id="list">

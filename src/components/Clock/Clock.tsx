@@ -24,7 +24,7 @@ const Clock = ({ play, setPlay, timerStopper }: {
 
         let interval: NodeJS.Timeout | null = null;
 
-        if (time > 0) {
+        if (time > 0 && time < timerStopper) {
             if (play) {
                 interval = setInterval(() => {
                     setTime(prev => prev - 1);
@@ -36,7 +36,7 @@ const Clock = ({ play, setPlay, timerStopper }: {
             localStorage.setItem("wordIndex", "");
         };
         return () => clearInterval(interval as NodeJS.Timeout);
-    }, [play, time, setPlay])
+    }, [play, time, setPlay, timerStopper])
 
 
     return (
