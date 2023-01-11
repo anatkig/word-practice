@@ -52,7 +52,7 @@ const Header = ({ setNewWords, setPlay, play }:
     useEffect(() => {
         window.addEventListener('keyup', handleKeyUp);
 
-        return () => window.addEventListener('keyup', handleKeyUp);
+        return () => window.removeEventListener('keyup', handleKeyUp);
     })
 
 
