@@ -24,7 +24,7 @@ const Clock = ({ play, setPlay, timerStopper }: {
 
         let interval: NodeJS.Timeout | null = null;
 
-        if (time > 0 && time < timerStopper) {
+        if (time > 0 && time <= timerStopper) {
             if (play) {
                 interval = setInterval(() => {
                     setTime(prev => prev - 1);

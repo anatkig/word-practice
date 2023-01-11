@@ -9,6 +9,7 @@ const Header = ({ setNewWords, setPlay, play }:
     const [inputValue, setInputValue] = useState<string>();
     const [isInputOpen, setIsInputOpen] = useState(false);
     const [startRestart, setStartRestart] = useState("Start");
+    const [firstTimer, setFirstTimer] = useState(true);
 
     useEffect(() => {
         if (play) {
@@ -35,7 +36,6 @@ const Header = ({ setNewWords, setPlay, play }:
         }
     }
     const handleStart = (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-
         if (startRestart === "Start") {
             setPlay(true);
             setStartRestart("Stop");
@@ -49,11 +49,11 @@ const Header = ({ setNewWords, setPlay, play }:
             handleStart()
         }
     }
-    useEffect(() => {
-        window.addEventListener('keyup', handleKeyUp);
 
-        return () => window.removeEventListener('keyup', handleKeyUp);
-    })
+    if (firstTimer) {
+        window.addEventListener('keyup', handleKeyUp);
+        setFirstTimer(false);
+    }
 
 
     return (

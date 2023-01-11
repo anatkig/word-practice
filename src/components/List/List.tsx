@@ -27,14 +27,16 @@ const List = ({ name, words, setCurrentWords }:
 
             if (chosenWord) {
                 const index = words.findIndex(word => word.ru === chosenWord);
-                words[index].hit = Number(words[index].hit) - 1;
-                localStorageWrite(words, "Current Words");
+                if (index !== -1) {
+                    words[index].hit = Number(words[index].hit) - 1;
+                    localStorageWrite(words, "Current Words");
 
-                if (timeout.current) {
-                    clearTimeout(timeout.current);
-                    timeout.current = null;
+                    if (timeout.current) {
+                        clearTimeout(timeout.current);
+                        timeout.current = null;
+                    }
+                    timeout.current = setTimeout(() => setOpen(false), 5000)
                 }
-                timeout.current = setTimeout(() => setOpen(false), 5000)
             }
         }
     }
