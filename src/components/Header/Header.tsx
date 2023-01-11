@@ -43,11 +43,18 @@ const Header = ({ setNewWords, setPlay, play }:
             setPlay(false);
         }
     }
-    window.addEventListener('keyup', (event) => {
+
+    const handleKeyUp = (event: KeyboardEvent) => {
         if (event.key === "Enter") {
             handleStart()
         }
+    }
+    useEffect(() => {
+        window.addEventListener('keyup', handleKeyUp);
+
+        return () => window.addEventListener('keyup', handleKeyUp);
     })
+
 
     return (
         <div id="header">
