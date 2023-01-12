@@ -1,6 +1,5 @@
 #counter-box {
     width: 95%;
-    height: 25%;
     border: solid black 2px;
     display: flex;
     flex-direction: column;
@@ -8,6 +7,7 @@
     align-items: center;
     row-gap: 10px;
     margin-top: 30px;
+    padding-bottom: 5px;
 }
 
 .counter {
