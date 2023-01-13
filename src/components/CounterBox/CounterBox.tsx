@@ -1,5 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState, useRef } from 'react';
 import localStorageGetCorrectInputsToday from '../../logic/localStorageGetCorrectInputsToday';
+import localStorageRead from '../../logic/localStorageRead';
 import Clock from '../Clock/Clock';
 import './counter-box.css';
 
@@ -12,6 +13,7 @@ const CounterBox = ({ count, play, setPlay, timerStopper, learntToday }: {
 }) => {
 
     const [correctInputs, setCorrectInputs] = useState(localStorageGetCorrectInputsToday);
+    const date = useRef(localStorageRead("date"));
 
     useEffect(() => {
 
@@ -39,6 +41,14 @@ const CounterBox = ({ count, play, setPlay, timerStopper, learntToday }: {
     useEffect(() => {
         localStorage.setItem("correctInputsToday", JSON.stringify(correctInputs));
     }, [correctInputs])
+
+    useEffect(() => {
+        const currentDate = new Date().getDate();
+        if (currentDate !== Number(date)) {
+            setCorrectInputs(0);
+            localStorage.setItem("date", JSON.stringify(currentDate));
+        }
+    }, []);
 
     return (
         <>
