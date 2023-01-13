@@ -44,7 +44,7 @@ const CounterBox = ({ count, play, setPlay, timerStopper, learntToday }: {
 
     useEffect(() => {
         const currentDate = new Date().getDate();
-        if (currentDate !== Number(date)) {
+        if (currentDate !== Number(date.current)) {
             setCorrectInputs(0);
             localStorage.setItem("date", JSON.stringify(currentDate));
         }
