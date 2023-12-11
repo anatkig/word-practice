@@ -14,3 +14,9 @@
 #name {
     cursor: pointer;
 }
+@media screen and (max-width: 450px) {
+    #word-container {
+        max-height: 70%;
+        overflow-y: auto;
+    }
+}

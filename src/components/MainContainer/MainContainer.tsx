@@ -19,12 +19,17 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
         setPlay: Dispatch<SetStateAction<boolean>>
     }) => {
 
+    const [openInMobile, setOpenInMobile] = useState(false);
     const [currentWords, setCurrentWords] = useState<StoredData[]>(localStorageRead("Current Words"));
     const [learntWords, setLearntWords] = useState<StoredData[]>(localStorageRead("Learnt Words"));
     const [count, setCount] = useState(0);
     const [timerStopper, setTimerStopper] = useState(600);
     const [availableLearnt, setAvailableLearnt] = useState<StoredData[]>([]);
     const [learntToday, setLearntToday] = useState<number>(0);
+
+    const handleButtonClick = ()=>{
+        setOpenInMobile(prev=>!prev);
+    }
 
     useEffect(() => {
         if (!play) {
@@ -121,10 +126,11 @@ const MainContainer = ({ wordsToLearn, setWordsToLearn, play, setPlay }:
                     play={play}
                 />
             </div>
-            <div className='main-column'>
+            <div className={`main-column ${!openInMobile?"word-containers":""}`}>
                 <List name={"Words to Learn"} words={wordsToLearn} />
                 <List name={"Learnt Words"} words={learntWords} />
             </div>
+            <button className='open-in-mobile' onClick={handleButtonClick}>Open Containers</button>
         </div>
     )
 }

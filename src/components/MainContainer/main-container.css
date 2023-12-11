@@ -18,3 +18,22 @@
     justify-content: flex-start;
     row-gap: 10%;
 }
+.open-in-mobile{
+    display: none;
+}
+@media screen and (max-width: 450px) {
+    #main-container {
+        flex-direction: column;
+    }
+    .main-column {
+        max-height: 30vh;
+    }
+    .word-containers {
+        display: none;
+    }
+    .open-in-mobile {
+        display: block;
+        position: absolute;
+        bottom:3px;
+    }
+}
