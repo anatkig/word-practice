@@ -24,16 +24,13 @@
 @media screen and (max-width: 450px) {
     #main-container {
         flex-direction: column;
-    }
-    .main-column {
-        max-height: 30vh;
-    }
+    } 
     .word-containers {
         display: none;
     }
     .open-in-mobile {
         display: block;
-        position: absolute;
+        position: sticky;
         bottom:3px;
     }
 }

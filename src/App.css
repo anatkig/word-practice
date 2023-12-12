@@ -4,3 +4,11 @@
   flex-direction: column;
   height: 100vh;
 }
+
+@media screen and (max-width: 450px) {
+  .App {
+    height: auto;
+    min-height: 100vh;
+  }
+  
+}
