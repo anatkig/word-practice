@@ -81,7 +81,7 @@ const WriteBox = ({ currentWords, setCurrentWords, setLearntWords, setCount, set
                 setLearntWords(prev => [...prev, currentUnit]);
             } else {
                 const curWords = [...currentWords];
-                curWords[wordIndex as number].hit = curWords[wordIndex as number].hit + 1;
+                curWords[wordIndex as number].hit = Number(curWords[wordIndex as number].hit) + 1;
                 setCurrentWords([...curWords]);
             }
         }
