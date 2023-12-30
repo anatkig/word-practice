@@ -16,3 +16,9 @@
     background-color: red;
     color: white;
 }
+
+@media screen and (max-width: 450px) {
+    .header-button {
+        font-size: 15px;
+    }
+}

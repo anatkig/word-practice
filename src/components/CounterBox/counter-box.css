@@ -13,3 +13,10 @@
 .counter {
     font-size: 40px;
 }
+
+@media screen and (max-width: 450px) {
+    .counter {
+        font-size: 30px;
+    }
+    
+}

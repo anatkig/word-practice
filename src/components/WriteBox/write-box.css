@@ -33,3 +33,9 @@
 #buttons button {
     cursor: pointer;
 }
+
+@media screen and (max-width: 450px) {
+    #input {
+        font-size: 15px;
+    }
+}
